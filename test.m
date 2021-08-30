@@ -7,20 +7,22 @@ x_init = [10,10,0,0,0]';
 rev_idx = [1 2];
 prop_functions = @propensity_functions;
 
-species = Gillespie_Reduction(gamma, prop_functions, x_init, tspan, err_tol, rev_idx);
+species = Gillespie_Reduction(Stoi, prop_functions, x_init, tspan, err_tol, rev_idx);
 disp(species)
 
-function f = propensity_functions(k)
+function lambda = propensity_functions(x)
 %fast reaction const
-kf = 100; %binding
-kb = 1; %unbinding
-
+k_f = 100; %binding
+k_b = 1; %unbinding
 %slow reaction const
-k1 = 0.1; %M1 transcription
-k2 = 0.001; %M2 transcription
-kd1 = 0.001; %M1 Degradation
-kd2 = 0.001; %M2 Degradation
-
-f = [kf*k(1)*k(2); kb*k(3); k1*k(1);
-            k2*k(3); kd1*k(4); kd2*k(5)];
+k_R = 0.1; %M_R transcription
+k_A = 0.001; %M_A transcription
+k_Rd = 0.001; %M_R Degradation
+k_Ad = 0.001; %M_A Degradation
+lambda(1) = k_f * x(1) * x(2); % D + P -> D:P
+lambda(2) = k_b * x(3); % D + P <- D:P
+lambda(3) = k_R * x(1); % D -> D + MR
+lambda(4) = k_A * x(3); % D:P -> D:P + MA
+lambda(5) = k_Rd * x(4); % MR -> 0
+lambda(6) = k_Ad * x(5); % MA -> 0
 end
