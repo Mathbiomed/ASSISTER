@@ -1,11 +1,7 @@
 function Output = Gillespie_Reduction(Stoi, propensity_functions, x_init, tspan, err_tol, rev_idx)
 %% Argument Check
-if nargin < 5
+if nargin < 6
    error('Invalid Input')
-end
-
-if nargin == 6
-   err_tol = 0.1; % Default error tolerance
 end
 
 %% Reduction
