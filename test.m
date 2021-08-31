@@ -1,14 +1,12 @@
+prop_functions = @propensity_functions;
 Stoi = [-1 -1 1 0 0 ; 1 1 -1 0 0 ; 0 0 0 1 0;...
-         0 0 0 0 1; 0 0 0 -1 0; 0 0 0 0 -1]'; %Stoichiometric
-
+         0 0 0 0 1; 0 0 0 -1 0; 0 0 0 0 -1]';
 tspan = 0:200:1600;
 err_tol = 0.1;
 x_init = [10,10,0,0,0]';
 rev_idx = [1 2];
-prop_functions = @propensity_functions;
 
-species = Gillespie_Reduction(Stoi, prop_functions, x_init, tspan, err_tol, rev_idx);
-disp(species)
+species = Gillespie_Reduction(Stoi, prop_functions, x_init, tspan, rev_idx, err_tol);
 
 function lambda = propensity_functions(x)
 %fast reaction const

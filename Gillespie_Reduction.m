@@ -1,4 +1,4 @@
-function Output = Gillespie_Reduction(Stoi, propensity_functions, x_init, tspan, err_tol, rev_idx)
+function Output = Gillespie_Reduction(Stoi, propensity_functions, x_init, tspan, rev_idx, err_tol)
 %% Argument Check
 if nargin < 6
    error('Invalid Input')
